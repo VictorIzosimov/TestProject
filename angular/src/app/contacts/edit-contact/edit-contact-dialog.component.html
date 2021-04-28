@@ -1,0 +1,83 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editcontactForm="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'Edit Contact' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <tabset>
+      <tab [heading]="'Details' | localize" class="pt-3 px-2">
+        <div class="form-group row required">
+          <label class="col-md-3 col-form-label" for="contactName">
+            {{ "Contact Name" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="contactName"
+              id="contactName"
+              required
+              minlength="2"
+              maxlength="32"
+              [(ngModel)]="contact.contactName"
+              #contactNameModel="ngModel"
+              #contactNameEl
+            />
+            <abp-validation-summary
+              [control]="contactNameModel"
+              [controlEl]="contactNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="email">
+                {{ "Email" | localize }}
+            </label>
+          <div class="col-md-9">
+            <input
+              type="text"
+              class="form-control"
+              name="email"
+              id="email"
+              required
+              minlength="2"
+              maxlength="32"
+              [(ngModel)]="contact.email"
+              #emailModel="ngModel"
+              #emailEl
+            />
+            <abp-validation-summary
+              [control]="emailModel"
+              [controlEl]="emailEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row mb-0">
+          <label class="col-md-3 col-form-label" for="age">
+            {{ "Age" | localize }}
+          </label>
+          <div class="col-md-9">
+            <textarea
+              type="text"
+              class="form-control"
+              name="age"
+              id="age"
+              [(ngModel)]="contact.age"
+            >
+            </textarea>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!editcontactForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
